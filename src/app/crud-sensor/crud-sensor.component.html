@@ -21,8 +21,18 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label for="status">  Soort data </mat-label>
-        <input matInput placeholder="Status van de sensor" id="status" type="text" formControlName="status">
+        <mat-label for="data_type">  Soort data </mat-label>
+        <input matInput placeholder="Status van de sensor" id="data_type" type="text" formControlName="data_type">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label for="lat">  Latitude </mat-label>
+        <input matInput placeholder="Status van de sensor" id="lat" type="number" formControlName="lat">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label for="lon">  Longitude </mat-label>
+        <input matInput placeholder="Status van de sensor" id="lon" type="number" formControlName="lon">
       </mat-form-field>
 
       <button mat-raised-button class="button" type="submit">Opslaan</button>
