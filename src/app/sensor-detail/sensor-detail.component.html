@@ -1,0 +1,21 @@
+<mat-card>
+
+  <h1> {{sensorName}} </h1>
+  <hr>
+  <img src="{{image}}" alt="sensor afbeelding">
+
+  <ul>
+    <li *ngFor="let val of values">
+     <h3> {{ val.name}} </h3>
+      {{ val.value}}
+    </li>
+  </ul>
+
+  <h3> Context</h3>
+  <div class="description">
+    {{description}}
+  </div>
+
+  <button mat-button> Aanpassen </button>
+  <button mat-button>  Verwijderen </button>
+</mat-card>

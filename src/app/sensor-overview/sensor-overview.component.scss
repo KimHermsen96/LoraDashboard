@@ -1,0 +1,26 @@
+mat-card {
+  display: inline-block;
+  width: 90%;
+}
+
+.map-container {
+  position: relative;
+  height: 400px;
+}
+
+#map {
+  position: relative;
+  height: inherit;
+  //width: 100%;
+}
+
+h1 {
+  font-family: 'Bungee', cursive;
+  text-align: center;
+  font-size: 1em;
+  color: #172B4D;
+}
+
+hr{
+  color: #172B4D;
+}

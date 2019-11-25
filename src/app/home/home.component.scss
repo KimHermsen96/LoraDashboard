@@ -1,0 +1,29 @@
+
+h1 {
+  font-family: 'Bungee', cursive;
+  color: white;
+}
+
+.overview-detail-container{
+  margin-left: 10%;
+  padding: 2%;
+}
+.cards-container{
+  display: flex;
+  align-items: stretch;
+}
+
+.overview-container{
+  width:100%;
+  display: inline-block;
+}
+
+.detail-container{
+  width:100%;
+  display: inline-block;
+}
+
+.material-icons{
+  font-size: 1em;
+}
+

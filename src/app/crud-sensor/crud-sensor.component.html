@@ -1,0 +1,31 @@
+<div class="form-container">
+
+
+  <h1> Sensor toevoegen </h1>
+
+  <mat-card>
+    <form [formGroup]="checkoutForm">
+
+
+
+<!--        <mat-label for="sensor_image"> Afbeelding</mat-label>-->
+<!--        <input mat-raised-button placeholder="" id="sensor_image" type="file" formControlName="sensor_image">-->
+<!--        <mat-label for="file"> File </mat-label>-->
+        <button type="button" mat-raised-button (click)="fileInput.click()">Voeg afbeelding van de sensor toe</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+
+
+      <mat-form-field>
+        <mat-label for="name"> Naam </mat-label>
+        <input matInput placeholder="naam van de sensor" id="name" type="text" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label for="status">  Soort data </mat-label>
+        <input matInput placeholder="Status van de sensor" id="status" type="text" formControlName="status">
+      </mat-form-field>
+
+      <button mat-raised-button class="button" type="submit">Opslaan</button>
+    </form>
+  </mat-card>
+</div>

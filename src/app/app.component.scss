@@ -1,0 +1,77 @@
+mat-sidenav-container{
+}
+
+
+ul{
+  list-style-type:none
+}
+
+mat-sidenav{
+  width: 304px;
+  min-width: 304px;
+  margin-right: 10%;
+
+  * > {
+    padding: 10%;
+  }
+}
+
+mat-sidenav-content{
+  transition: background 2s ease;
+  background: linear-gradient(#172B4D 60%, #EAEAEA 40%);
+}
+
+
+h1{
+  font-family: 'Bungee', cursive !important;
+
+}
+
+button{
+  background: lightgrey;
+  color: #EAEAEA;
+  font-family: 'Bungee', cursive;
+}
+
+.material-icons-outlined{
+  font-size: 2em;
+}
+
+.material-icons{
+  font-size: 2em;
+}
+
+.sidenav-container  {
+  position: fixed ;
+  background: white;
+  height: 100%;
+
+  > button{
+    background: white;
+    color: black;
+  }
+}
+
+.iconButton{
+  display: block;
+  position: relative;
+  margin-top: 40%;
+  padding: 0;
+  font-size: 1em;
+  background: white!important;
+  border: none;
+  width: 100%;
+
+}
+
+.topbutton{
+  margin-top: 20%!important;
+}
+.icontextButton{
+  display: block;
+  position: relative;
+  margin-top: 10%;
+  font-size: 1em;
+  background-color:  white;
+  color: black;
+}

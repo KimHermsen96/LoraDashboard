@@ -1,0 +1,28 @@
+<div [hidden]="overviewDetail" class="overview-detail-container">
+  <h1>
+    <i class="material-icons">
+      home
+    </i>
+    Dashboard
+  </h1>
+  <div class="cards-container">
+    <div class="overview-container">
+      <app-sensor-overview></app-sensor-overview>
+    </div>
+    <div class="detail-container">
+      <app-sensor-detail></app-sensor-detail>
+    </div>
+  </div>
+</div>
+
+
+<div [hidden]="settings">
+  <app-settings></app-settings>
+</div>
+
+
+<div [hidden]="addSensor">
+
+  <app-crud-sensor></app-crud-sensor>
+</div>
+
