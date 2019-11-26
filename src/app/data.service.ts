@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class DataService {
 
-  private REST_API_SERVER = 'http://localhost:3000';
+  private REST_API_SERVER = 'http://192.168.1.45:3000/device/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,7 +25,26 @@ export class DataService {
     return throwError(errorMessage);
   }
 
-  public sendGetRequest() {
-    return this.httpClient.get(this.REST_API_SERVER).pipe(retry(3), catchError(this.handleError));
+  public sendGetRequest(query = null) {
+    if (query == null) {
+      query = 'all';
+    }
+
+    return this.httpClient.get(this.REST_API_SERVER + query).pipe(retry(3), catchError(this.handleError));
+  }
+}
+
+export class MyService {
+  myMethod$: Observable<any>;
+  private myMethodSubject = new Subject<any>();
+
+  constructor() {
+    this.myMethod$ = this.myMethodSubject.asObservable();
+  }
+
+  myMethod(data) {
+    console.log(data);
+    // we can do stuff with data if we want
+    this.myMethodSubject.next(data);
   }
 }

@@ -15,6 +15,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFileUploadModule } from 'angular-material-fileupload';
+import {MyService} from "./data.service";
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     MatButtonModule,
     MatFileUploadModule
   ],
-  providers: [],
+  providers: [MyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
