@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { DataService } from '../data.service';
 
 
 @Component({
@@ -9,7 +10,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 })
 export class SensorDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   sensorName = 'Sensor A001';
   image = 'https://robu.in/wp-content/uploads/2017/05/voltage-sensor-1.png';
@@ -18,12 +19,18 @@ export class SensorDetailComponent implements OnInit {
     'Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ';
 
   values = [
-    {name: 'Naam' , value: 'Warmte sensor'},
+    {name: 'Naam' , value: 'Warmte sensor 1'},
     {name: 'Status' , value: 'Aan'},
+    {name: 'Type' , value: 'Temperatuur sensor'},
     {name: 'Soort data' , value: 'Graden'},
+    {name: 'Locatie' , value: 'IOT Lab'},
   ];
 
   ngOnInit() {
+    // this.dataService.sendGetRequest().subscribe((data: any[]) => {
+    //   console.log(data);
+    //   this.values = data;
+    // });
   }
 
 }

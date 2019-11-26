@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-sensor-overview',
@@ -14,7 +15,7 @@ export class SensorOverviewComponent implements OnInit {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   });
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   sensors: string[] = [
     'A001', 'A004', 'A003', 'A002'
@@ -24,6 +25,11 @@ export class SensorOverviewComponent implements OnInit {
   ngOnInit() {
     this.initMap();
     this.tiles.addTo(this.map);
+
+    // this.dataService.sendGetRequest().subscribe((data: any[]) => {
+    //   console.log(data);
+    //   this.sensors = data;
+    // });
   }
 
   private initMap(): void {
