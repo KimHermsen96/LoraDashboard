@@ -1,8 +1,12 @@
 
-
 .form-container {
-  width: 60%;
+  width: 50%;
   margin: 0 auto;
+
+  > * {
+    margin: 5% 0;
+    padding: 5%;
+  }
 }
 
 mat-card{
@@ -14,6 +18,8 @@ mat-card{
 h1 {
   font-family: 'Bungee', cursive;
   color: white;
+  margin: 0!important;
+  padding: 0!important;
 }
 
 
@@ -22,10 +28,6 @@ mat-label{
 }
 input{
   width:100%;
-}
-
-mat-form-field{
-  width: 100%;
 }
 
 .mat-form-field-label {
@@ -53,4 +55,11 @@ button{
   color: white;
   font-family: 'Bungee', cursive;
 }
+mat-form-field{
+  width: 100%;
+  margin: 4% 0;
+}
 
+.submit-button{
+  float: right;
+}

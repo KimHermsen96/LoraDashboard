@@ -9,9 +9,16 @@ img{
 }
 
 ul{
-   display: inline-block;
- }
+  display: inline-block;
+  list-style:none;
 
+}
+
+h3{
+  font-family: 'Bungee', cursive;
+  color: #172B4D;
+  margin: 0;
+}
 h1{
   text-align: center;
   font-family: 'Bungee', cursive;
@@ -19,11 +26,12 @@ h1{
   color: #172B4D;
 }
 .description {
-  margin: 0px;
+  margin: 0;
 }
 button{
   background-color: #172B4D;
   color: white;
   font-family: 'Bungee', cursive;
   margin: 4% 1% 1%;
+  float: right;
 }
