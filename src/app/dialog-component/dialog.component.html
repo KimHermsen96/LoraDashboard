@@ -1,1 +1,10 @@
-<p>dialog-component works!</p>
+<p></p>
+
+<div class="messages" *ngIf="dialogService.messages.length">
+
+  <div class="message" *ngFor="let m of dialogService.messages">
+
+   {{m}}
+    <hr>
+  </div>
+</div>

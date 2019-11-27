@@ -24,7 +24,8 @@ export class CrudSensorComponent implements OnInit {
       status: '',
       data_type: '',
       lat: '',
-      lon: ''
+      lon: '',
+      description: ''
     });
   }
 
@@ -70,6 +71,20 @@ export class CrudSensorComponent implements OnInit {
   private validateForm(formvalue) {
     this.addMessage(this.checkLatAndLon(formvalue, 'lat'));
     this.addMessage(this.checkLatAndLon(formvalue, 'lon'));
+    this.addMessage(this.checkName(formvalue));
+    this.addMessage(this.checkDataType(formvalue));
+  }
+
+  private checkName(formvalue) {
+    if (formvalue.name.length >= 30 || !formvalue.name) {
+      return 'De naam is verplicht en mag maximaal 30 karakters lang zijn';
+    }
+  }
+
+  private checkDataType(formvalue) {
+    if (formvalue.data_type >= 30  || !formvalue.data_type) {
+      return 'Het data type is verplicht en mag maximaal 30 karakters lang zijn.';
+    }
   }
 
   private addMessage(message) {
@@ -79,13 +94,16 @@ export class CrudSensorComponent implements OnInit {
   }
 
   onSubmit(formvalue) {
-    console.log(formvalue);
+    // console.log(formvalue);
     this.validateForm(formvalue);
 
     if (this.message.length > 0) {
       this.dialogservice.openDialog(this.message);
+      this.message.forEach( m => {
+        console.log("hier");
+        console.log(m);
+      });
       this.message = [];
     }
-
   }
 }

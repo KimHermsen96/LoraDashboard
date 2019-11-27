@@ -20,6 +20,9 @@ h1 {
   color: white;
   margin: 0!important;
   padding: 0!important;
+  i {
+    font-size: 1em;
+  }
 }
 
 
@@ -62,4 +65,8 @@ mat-form-field{
 
 .submit-button{
   float: right;
+}
+
+textarea{
+  background-color: #f2f2f2;
 }

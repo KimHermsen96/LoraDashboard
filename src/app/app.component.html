@@ -1,25 +1,6 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #sidenav mode="over" [(opened)]="opened" (opened)="events.push('open!')"
                (closed)="events.push('close!')">
-    <!--    <ul>-->
-    <!--      <li>-->
-
-    <!--        <button mat-button (click)="navigate('overzicht')">-->
-    <!--          <i class="material-icons-outlined">home</i>-->
-    <!--          Overzicht-->
-    <!--        </button>-->
-    <!--      -->
-    <!--      </li>-->
-    <!--      <li (click)="navigate('add_sensor')">-->
-    <!--        <i class="material-icons"> add_circle_outline-->
-    <!--        </i>-->
-    <!--        <button mat-button (click)="navigate('add_sensor')"> Sensor toevoegen</button>-->
-    <!--      </li>-->
-    <!--      <li>-->
-    <!--        <i class="material-icons-outlined"> settings_applications</i>-->
-    <!--        <button mat-button (click)="navigate('settings')"> Instellingen</button>-->
-    <!--      </li>-->
-    <!--    </ul>-->
 
     <button class="icontextButton topbutton" mat-button (click)="navigate('overzicht')">
       <i class="material-icons-outlined">home</i>
