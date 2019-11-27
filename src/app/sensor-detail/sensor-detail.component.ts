@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { DataService, MyService } from '../data.service';
 
 
 @Component({
@@ -8,20 +9,53 @@ import {MatGridListModule} from '@angular/material/grid-list';
   styleUrls: ['./sensor-detail.component.scss']
 })
 export class SensorDetailComponent implements OnInit {
+  public selectedOption: string;
 
-  constructor() { }
-
-  sensorName = 'Sensor A001';
+  sensorName = '-';
   image = 'https://robu.in/wp-content/uploads/2017/05/voltage-sensor-1.png';
-  description = 'lLorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. ' +
-    'Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ' +
-    'Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ';
+  description = '-';
 
   values = [
-    {name: 'Naam' , value: 'Warmte sensor'},
-    {name: 'Status' , value: 'Aan'},
-    {name: 'Soort data' , value: 'Graden'},
+    {name: 'Naam' , value: '-'},
+    {name: 'Status' , value: '-'},
+    {name: 'Type' , value: '-'},
+    {name: 'Soort data' , value: '-'},
+    {name: 'Locatie' , value: '-'},
   ];
+
+  constructor(private dataService: DataService, private myService: MyService) {
+    this.myService.myMethod$.subscribe((value) => {
+          this.selectedOption = value;
+          if (!this.selectedOption) {
+            // Undefined
+            this.values = [
+              {name: 'Naam' , value: '-'},
+              {name: 'Status' , value: '-'},
+              {name: 'Type' , value: '-'},
+              {name: 'Soort data' , value: '-'},
+              {name: 'Locatie' , value: '-'},
+            ];
+            this.sensorName = '-';
+            this.description = '-';
+          } else {
+            // Not undefined
+            this.dataService.sendGetRequest(value).subscribe((data: any) => {
+              console.log(data);
+              // TODO: Specifieke sensor ophalen die geselecteerd is
+              this.values = [
+                {name: 'Naam', value: data.Name},
+                {name: 'Status' , value: data.Status},
+                {name: 'Type' , value: data.Type},
+                {name: 'Soort data' , value: data.DataType},
+                {name: 'Locatie' , value: data.Location},
+              ];
+              this.sensorName = data.Name;
+              this.description = data.Description;
+            });
+          }
+        }
+    );
+  }
 
   ngOnInit() {
   }

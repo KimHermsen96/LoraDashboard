@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,9 +15,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFileUploadModule } from 'angular-material-fileupload';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { DialogComponent } from './dialog-component/dialog.component';
+import {MyService} from "./data.service";
+
 
 @NgModule({
   declarations: [
@@ -25,12 +25,10 @@ import { DialogComponent } from './dialog-component/dialog.component';
     SensorOverviewComponent,
     SensorDetailComponent,
     CrudSensorComponent,
-    SettingsComponent,
-    DialogComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
-    CommonModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -40,12 +38,9 @@ import { DialogComponent } from './dialog-component/dialog.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatFileUploadModule,
+    MatFileUploadModule
   ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    DialogComponent
-  ]
+  providers: [MyService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
