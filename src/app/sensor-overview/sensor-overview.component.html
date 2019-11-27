@@ -2,16 +2,12 @@
   <h1> Alle aangesloten sensoren op het netwerk </h1>
 
   <hr>
-  <div class="map-container">
-      <div id="map"></div>
-  </div>
-
 
   <mat-form-field>
     <mat-label>Kies een sensor </mat-label>
-    <mat-select>
+    <mat-select [(ngModel)]="selectedOption" (selectionChange)="valueChanged()">
       <mat-option>None</mat-option>
-      <mat-option *ngFor="let sensor of sensors" [value]="sensor">{{sensor}}</mat-option>
+      <mat-option *ngFor="let sensor of ids" [value]="sensor">{{sensor}}</mat-option>
     </mat-select>
   </mat-form-field>
 </mat-card>
