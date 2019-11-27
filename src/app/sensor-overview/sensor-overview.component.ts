@@ -25,7 +25,7 @@ export class SensorOverviewComponent implements OnInit {
 
 
   ngOnInit() {
-    this.initMap();
+    // this.initMap();
     this.tiles.addTo(this.map);
 
     this.dataService.sendGetRequest().subscribe((data: any[]) => {
@@ -36,12 +36,12 @@ export class SensorOverviewComponent implements OnInit {
     });
   }
 
-  private initMap(): void {
-    this.map = L.map('map', {
-      center: [ 51.69917, 5.30417 ],
-      zoom: 12
-    });
-  }
+  // private initMap(): void {
+  //   this.map = L.map('map', {
+  //     center: [ 51.69917, 5.30417 ],
+  //     zoom: 12
+  //   });
+  // }
 
   valueChanged() {
     this.myService.myMethod(this.selectedOption);
