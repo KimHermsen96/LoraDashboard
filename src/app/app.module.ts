@@ -17,6 +17,7 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { DialogComponent } from './dialog-component/dialog.component';
+import {DataService} from './data.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { DialogComponent } from './dialog-component/dialog.component';
     MatButtonModule,
     MatFileUploadModule,
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent],
   entryComponents: [
     DialogComponent
