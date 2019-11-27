@@ -12,6 +12,7 @@ export class CrudSensorComponent implements OnInit {
   checkoutForm;
   selectedFile;
   message: string[] = [];
+  srcResult;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,29 +21,28 @@ export class CrudSensorComponent implements OnInit {
   ) {
     this.checkoutForm = this.formBuilder.group({
       name: '',
+      status: '',
       data_type: '',
       lat: '',
-      lon: '',
+      lon: ''
     });
   }
 
   ngOnInit() {
   }
 
-  onFileSelected(event) {
-    this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile);
-    //hier omzetten naar dat base64
-  }
 
-  onSubmit(formvalue) {
-    console.log(formvalue);
+  onFileSelected() {
+    const inputNode: any = document.querySelector('#file');
 
-    this.validateForm(formvalue);
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
 
-    if (this.message.length > 0) {
-      this.dialogservice.openDialog(this.message);
-      this.message = [];
+      reader.onload = (e: any) => {
+        this.srcResult = e.target.result;
+      };
+
+      reader.readAsArrayBuffer(inputNode.files[0]);
     }
   }
 
@@ -76,5 +76,16 @@ export class CrudSensorComponent implements OnInit {
     if (message) {
       this.message.push(message);
     }
+  }
+
+  onSubmit(formvalue) {
+    console.log(formvalue);
+    this.validateForm(formvalue);
+
+    if (this.message.length > 0) {
+      this.dialogservice.openDialog(this.message);
+      this.message = [];
+    }
+
   }
 }
