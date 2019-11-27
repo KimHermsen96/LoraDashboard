@@ -61,7 +61,6 @@ export class CrudSensorComponent implements OnInit {
       returnString = 'Latitude is een nummer tussen de -90 en 90. Vul de numerieke waarde in.';
     }
 
-
     if (!value || value > max || value < min || Number.isNaN(value)) {
       return returnString;
     }

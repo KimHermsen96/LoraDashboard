@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import {DataService, MyService} from '../data.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-sensor-overview',
@@ -9,39 +9,33 @@ import {DataService, MyService} from '../data.service';
 })
 export class SensorOverviewComponent implements OnInit {
   private map;
+  private apiUrl = '192.168.1.45:3000/device/all';
 
-  public selectedOption: string;
   tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   });
 
-  constructor(private dataService: DataService, private myService: MyService) {
-    this.myService.myMethod(this.selectedOption);
-  }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  sensors: string[] = [];
-  ids: string[] = [];
+  sensors: string[] = [
+    'A001', 'A004', 'A003', 'A002'
+  ];
+
 
   ngOnInit() {
     this.initMap();
     this.tiles.addTo(this.map);
-    this.dataService.sendGetRequest().subscribe((data: any[]) => {
-      data.forEach((element) => {
-        this.sensors.push(element.Name);
-        this.ids.push(element.id);
-      });
-    });
+    console.log(this.http.get(this.apiUrl));
+
   }
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [ 51.69917, 5.30417 ],
-      zoom: 12
+      center: [ 39.8282, -98.5795 ],
+      zoom: 3
     });
-  }
-
-  valueChanged() {
-    this.myService.myMethod(this.selectedOption);
   }
 }
