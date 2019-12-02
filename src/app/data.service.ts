@@ -32,6 +32,11 @@ export class DataService {
     console.log(this.REST_API_SERVER + query);
     return this.httpClient.get(this.REST_API_SERVER + query).pipe(retry(3), catchError(this.handleError));
   }
+
+  public sendDeleteRequest(deleteId) {
+    console.log(this.REST_API_SERVER + 'delete/' + deleteId);
+    return this.httpClient.delete(this.REST_API_SERVER + 'delete/' + deleteId).pipe(retry(3), catchError(this.handleError));
+  }
 }
 
 export class MyService {

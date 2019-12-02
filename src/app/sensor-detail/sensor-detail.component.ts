@@ -60,4 +60,13 @@ export class SensorDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteSensor() {
+    console.log(this.selectedOption);
+    this.dataService.sendDeleteRequest(this.selectedOption).subscribe((data: any) => {
+      console.log(data);
+    });
+    // deleteId = this.values;
+    // this.dataService.sendGetRequest(deleteId);
+  }
+
 }
