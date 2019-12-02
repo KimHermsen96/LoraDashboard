@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { MatButtonModule} from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {DialogService} from '../dialog.service';
 
 @Component({
   selector: 'app-crud-sensor',
@@ -14,7 +15,9 @@ export class CrudSensorComponent implements OnInit {
   srcResult;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private dialogservice: DialogService
   ) {
     this.checkoutForm = this.formBuilder.group({
       name: '',
@@ -44,7 +47,13 @@ export class CrudSensorComponent implements OnInit {
     }
   }
 
+  private checkLatAndLon(formvalue, latorLon) {
 
+    console.log(formvalue);
+    let max = 180;
+    let min = -180;
+    let value = formvalue.lon;
+    let returnString = 'Longtitude is een nummer tussen de -180 en 180. Vul de numerieke waarde in.';
 
     if (latorLon === 'lat') {
       max = 90;
