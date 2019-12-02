@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DialogComponent} from './dialog-component/dialog.component';
 import {MatDialog} from '@angular/material';
 
@@ -6,17 +6,24 @@ import {MatDialog} from '@angular/material';
   providedIn: 'root'
 })
 export class DialogService {
+  accomplished;
+  messages;
 
   constructor(private dialog: MatDialog) {
   }
-  messages;
-  openDialog(m) {
+
+  openDialog(m, accomplished) {
     this.messages = [];
     this.dialog.open(DialogComponent, {
       height: '400px',
       width: '600px',
       data: {message: m},
     });
-    this.messages  = m;
+
+    if (accomplished) {
+      this.accomplished = m;
+    } else {
+      this.messages = m;
+    }
   }
 }

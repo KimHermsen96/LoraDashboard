@@ -94,16 +94,17 @@ export class CrudSensorComponent implements OnInit {
   }
 
   onSubmit(formvalue) {
-    // console.log(formvalue);
     this.validateForm(formvalue);
 
     if (this.message.length > 0) {
-      this.dialogservice.openDialog(this.message);
+      this.dialogservice.openDialog(this.message, false);
       this.message.forEach( m => {
-        console.log("hier");
         console.log(m);
       });
       this.message = [];
+    } else {
+      this.message[0] = 'Uw sensor is succesvol opgeslagen in de database';
+      this.dialogservice.openDialog(this.message, true);
     }
   }
 }
