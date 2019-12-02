@@ -15,7 +15,7 @@
       </mat-form-field>
 
       Sensor afbeelding
-      <button type="button" mat-raised-button (click)="fileInput.click()"> Zoek op computer</button>
+      <button class="FileButton" type="button" mat-raised-button (click)="fileInput.click()"> Zoek op computer</button>
       <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
 
       <div *ngIf="selectedFile">
