@@ -23,8 +23,7 @@ export class CrudSensorComponent implements OnInit {
       name: '',
       status: '',
       data_type: '',
-      lat: '',
-      lon: '',
+      location: '',
       description: ''
     });
   }
@@ -47,44 +46,13 @@ export class CrudSensorComponent implements OnInit {
     }
   }
 
-  private checkLatAndLon(formvalue, latorLon) {
-
-    console.log(formvalue);
-    let max = 180;
-    let min = -180;
-    let value = formvalue.lon;
-    let returnString = 'Longtitude is een nummer tussen de -180 en 180. Vul de numerieke waarde in.';
-
-    if (latorLon === 'lat') {
-      max = 90;
-      min = -90;
-      value = formvalue.lat;
-      returnString = 'Latitude is een nummer tussen de -90 en 90. Vul de numerieke waarde in.';
-    }
-
-
-    if (!value || value > max || value < min || Number.isNaN(value)) {
-      return returnString;
-    }
-  }
-
   private validateForm(formvalue) {
-    this.addMessage(this.checkLatAndLon(formvalue, 'lat'));
-    this.addMessage(this.checkLatAndLon(formvalue, 'lon'));
-    this.addMessage(this.checkName(formvalue));
-    this.addMessage(this.checkDataType(formvalue));
-  }
-
-  private checkName(formvalue) {
-    if (formvalue.name.length >= 30 || !formvalue.name) {
-      return 'De naam is verplicht en mag maximaal 30 karakters lang zijn';
-    }
-  }
-
-  private checkDataType(formvalue) {
-    if (formvalue.data_type >= 30  || !formvalue.data_type) {
-      return 'Het data type is verplicht en mag maximaal 30 karakters lang zijn.';
-    }
+    const formvalues = [formvalue.name, formvalue.data_type, formvalue.location];
+    formvalues.forEach( val => {
+      if (val.length > 2  || !val) {
+        this.addMessage( val + ' is verplicht en  mag niet meer dan 80 karakters lang zijn' );
+      }
+    });
   }
 
   private addMessage(message) {

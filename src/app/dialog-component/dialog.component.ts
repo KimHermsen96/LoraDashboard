@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogService} from '../dialog.service';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogService} from '../dialog.service';
 
 @Component({
   selector: 'app-dialog-component',
