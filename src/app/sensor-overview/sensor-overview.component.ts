@@ -27,6 +27,8 @@ export class SensorOverviewComponent implements OnInit {
 
   ngOnInit() {
     // this.initMap();
+    if (this.map != null)
+    {
     this.tiles.addTo(this.map);
 
     this.dataService.sendGetRequest().subscribe((data: any[]) => {
@@ -36,9 +38,13 @@ export class SensorOverviewComponent implements OnInit {
       });
     });
   }
+  else{
+    //TODO: Can't connect to database message
+  }
+  }
 
   private initMap(): void {
-    this.map = L.map('map', {
+    this.map = new L.map('map', {
       center: [51.69917, 5.30417],
       zoom: 12
     });
