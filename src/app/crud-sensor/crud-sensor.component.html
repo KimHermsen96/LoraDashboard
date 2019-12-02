@@ -9,9 +9,6 @@
   <mat-card>
     <form [formGroup]="checkoutForm">
 
-      <button type="button" mat-raised-button (click)="fileInput.click()">Voeg afbeelding van de sensor toe</button>
-      <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-
       <div *ngIf="selectedFile">
         {{selectedFile.name}} is geselecteerd
       </div>
