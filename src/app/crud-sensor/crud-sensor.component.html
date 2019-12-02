@@ -14,12 +14,15 @@
         <input matInput placeholder="naam van de sensor" id="name" type="text" formControlName="name">
       </mat-form-field>
 
-      Sensor afbeelding
-      <button class="FileButton" type="button" mat-raised-button (click)="fileInput.click()"> Zoek op computer</button>
-      <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+      <div class="add-file-container">
+        Sensor afbeelding
+        <button class="file-button" type="button" mat-raised-button (click)="fileInput.click()"> Zoek op computer
+        </button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
 
-      <div *ngIf="selectedFile">
-        {{selectedFile.name}} is geselecteerd
+        <div *ngIf="selectedFile">
+          {{selectedFile.name}} is geselecteerd
+        </div>
       </div>
 
       <mat-form-field>

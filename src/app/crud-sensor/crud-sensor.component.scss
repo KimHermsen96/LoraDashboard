@@ -4,11 +4,18 @@
   width: 50%;
   margin: 0 auto;
 }
-
+mat-form-field{
+  margin-bottom: 10%;
+}
 mat-card{
   display: flex;
   justify-content: center;
 
+}
+
+
+.add-file-container{
+  margin-bottom: 10%;
 }
 
 h1 {
@@ -21,7 +28,7 @@ h1 {
   }
 }
 
-.FileButton{
+button{
   float: right;
 }
 
