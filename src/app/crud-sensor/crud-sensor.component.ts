@@ -9,6 +9,8 @@ import { MatButtonModule} from '@angular/material';
 })
 export class CrudSensorComponent implements OnInit {
   checkoutForm;
+  selectedFile;
+  message: string[] = [];
   srcResult;
 
   constructor(
@@ -16,12 +18,17 @@ export class CrudSensorComponent implements OnInit {
   ) {
     this.checkoutForm = this.formBuilder.group({
       name: '',
-      status: ''
+      status: '',
+      data_type: '',
+      lat: '',
+      lon: '',
+      description: ''
     });
   }
 
   ngOnInit() {
   }
+
 
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
@@ -39,4 +46,56 @@ export class CrudSensorComponent implements OnInit {
 
 
 
+    if (latorLon === 'lat') {
+      max = 90;
+      min = -90;
+      value = formvalue.lat;
+      returnString = 'Latitude is een nummer tussen de -90 en 90. Vul de numerieke waarde in.';
+    }
+
+
+    if (!value || value > max || value < min || Number.isNaN(value)) {
+      return returnString;
+    }
+  }
+
+  private validateForm(formvalue) {
+    this.addMessage(this.checkLatAndLon(formvalue, 'lat'));
+    this.addMessage(this.checkLatAndLon(formvalue, 'lon'));
+    this.addMessage(this.checkName(formvalue));
+    this.addMessage(this.checkDataType(formvalue));
+  }
+
+  private checkName(formvalue) {
+    if (formvalue.name.length >= 30 || !formvalue.name) {
+      return 'De naam is verplicht en mag maximaal 30 karakters lang zijn';
+    }
+  }
+
+  private checkDataType(formvalue) {
+    if (formvalue.data_type >= 30  || !formvalue.data_type) {
+      return 'Het data type is verplicht en mag maximaal 30 karakters lang zijn.';
+    }
+  }
+
+  private addMessage(message) {
+    if (message) {
+      this.message.push(message);
+    }
+  }
+
+  onSubmit(formvalue) {
+    this.validateForm(formvalue);
+
+    if (this.message.length > 0) {
+      this.dialogservice.openDialog(this.message, false);
+      this.message.forEach( m => {
+        console.log(m);
+      });
+      this.message = [];
+    } else {
+      this.message[0] = 'Uw sensor is succesvol opgeslagen in de database';
+      this.dialogservice.openDialog(this.message, true);
+    }
+  }
 }

@@ -15,6 +15,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFileUploadModule } from 'angular-material-fileupload';
+import { CommonModule } from '@angular/common';
+import { DialogComponent } from './dialog-component/dialog.component';
+import {DataService} from './data.service';
 import {MyService} from "./data.service";
 
 
@@ -25,7 +28,9 @@ import {MyService} from "./data.service";
     SensorOverviewComponent,
     SensorDetailComponent,
     CrudSensorComponent,
-    SettingsComponent
+    SettingsComponent,
+    DialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -38,9 +43,14 @@ import {MyService} from "./data.service";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatFileUploadModule
+    MatFileUploadModule,
+    CommonModule
   ],
+
   providers: [MyService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DialogComponent
+  ]
 })
 export class AppModule { }

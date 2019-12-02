@@ -11,6 +11,8 @@ export class SensorOverviewComponent implements OnInit {
   private map;
   public selectedOption: string;
 
+  public selectedOption: string;
+
   tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -19,6 +21,7 @@ export class SensorOverviewComponent implements OnInit {
   constructor(private dataService: DataService, private myService: MyService) {
     this.myService.myMethod(this.selectedOption);
   }
+
 
   sensors: string[] = [];
   ids: string[] = [];
@@ -36,14 +39,14 @@ export class SensorOverviewComponent implements OnInit {
     });
   }
 
-  // private initMap(): void {
-  //   this.map = L.map('map', {
-  //     center: [ 51.69917, 5.30417 ],
-  //     zoom: 12
-  //   });
-  // }
+  private initMap(): void {
+    this.map = L.map('map', {
+      center: [51.69917, 5.30417],
+      zoom: 12
+    });
+  }
 
-  valueChanged() {
+  private valueChanged() {
     this.myService.myMethod(this.selectedOption);
   }
 }
