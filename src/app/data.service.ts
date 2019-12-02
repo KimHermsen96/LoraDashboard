@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class DataService {
 
-  private REST_API_SERVER = 'http://192.168.43.181:3000/device/';
+  private REST_API_SERVER = 'http://192.168.1.44:3000/device/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -29,7 +29,7 @@ export class DataService {
     if (query == null) {
       query = 'all';
     }
-
+    console.log(this.REST_API_SERVER + query);
     return this.httpClient.get(this.REST_API_SERVER + query).pipe(retry(3), catchError(this.handleError));
   }
 }

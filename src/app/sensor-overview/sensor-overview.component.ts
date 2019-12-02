@@ -8,13 +8,13 @@ import { DataService, MyService } from '../data.service';
   styleUrls: ['./sensor-overview.component.scss']
 })
 export class SensorOverviewComponent implements OnInit {
-  private map;
+  // private map;
   public selectedOption: string;
 
-  tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  });
+  // tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //   maxZoom: 19,
+  //   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  // });
 
   constructor(private dataService: DataService, private myService: MyService) {
     this.myService.myMethod(this.selectedOption);
@@ -27,7 +27,7 @@ export class SensorOverviewComponent implements OnInit {
 
   ngOnInit() {
     // this.initMap();
-    this.tiles.addTo(this.map);
+    // this.tiles.addTo(this.map);
 
     this.dataService.sendGetRequest().subscribe((data: any[]) => {
       data.forEach((element) => {
@@ -37,12 +37,12 @@ export class SensorOverviewComponent implements OnInit {
     });
   }
 
-  private initMap(): void {
-    this.map = L.map('map', {
-      center: [51.69917, 5.30417],
-      zoom: 12
-    });
-  }
+  // private initMap(): void {
+  //   this.map = L.map('map', {
+  //     center: [51.69917, 5.30417],
+  //     zoom: 12
+  //   });
+  // }
 
   private valueChanged() {
     this.myService.myMethod(this.selectedOption);
