@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatGridListModule} from '@angular/material/grid-list';
 import { DataService, MyService } from '../data.service';
+import { AppComponent } from '../app.component';
 
 
 @Component({
@@ -23,7 +23,11 @@ export class SensorDetailComponent implements OnInit {
     {name: 'Locatie' , value: '-'},
   ];
 
-  constructor(private dataService: DataService, private myService: MyService) {
+  constructor(
+      private dataService: DataService,
+      private myService: MyService,
+      private appComponent: AppComponent
+  ) {
     this.myService.myMethod$.subscribe((value) => {
           this.selectedOption = value;
           if (!this.selectedOption) {
@@ -41,7 +45,7 @@ export class SensorDetailComponent implements OnInit {
             // Not undefined
             this.dataService.sendGetRequest(value).subscribe((data: any) => {
               console.log(data);
-              // TODO: Specifieke sensor ophalen die geselecteerd is
+              // Specifieke sensor ophalen die geselecteerd is
               this.values = [
                 {name: 'Naam', value: data.Name},
                 {name: 'Status' , value: data.Status},
@@ -65,8 +69,9 @@ export class SensorDetailComponent implements OnInit {
     this.dataService.sendDeleteRequest(this.selectedOption).subscribe((data: any) => {
       console.log(data);
     });
-    // deleteId = this.values;
-    // this.dataService.sendGetRequest(deleteId);
+  }
+  navigate(x) {
+      this.appComponent.navigate(x);
   }
 
 }

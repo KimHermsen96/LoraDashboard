@@ -2,22 +2,26 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {DialogService} from '../dialog.service';
+import {DataService, MyService} from '../data.service';
 
 @Component({
-  selector: 'app-crud-sensor',
-  templateUrl: './crud-sensor.component.html',
-  styleUrls: ['./crud-sensor.component.scss']
+  selector: 'app-edit-sensor',
+  templateUrl: './edit-sensor.component.html',
+  styleUrls: ['./edit-sensor.component.scss']
 })
-export class CrudSensorComponent implements OnInit {
+export class EditSensorComponent implements OnInit {
   checkoutForm;
   selectedFile;
   message: string[] = [];
   srcResult;
+  public selectedOption: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dialogservice: DialogService
+    private dialogservice: DialogService,
+    private dataService: DataService,
+    private myService: MyService
   ) {
     this.checkoutForm = this.formBuilder.group({
       name: '',
@@ -26,6 +30,36 @@ export class CrudSensorComponent implements OnInit {
       data_type: '',
       location: '',
       description: ''
+    });
+
+    this.myService.myMethod$.subscribe((value) => {
+      console.log(value);
+      this.selectedOption = value;
+      if (!this.selectedOption) {
+        // Undefined
+        this.checkoutForm = this.formBuilder.group({
+          name: '',
+          status: '',
+          type: '',
+          data_type: '',
+          location: '',
+          description: ''
+        });
+      } else {
+        // Not undefined
+        this.dataService.sendGetRequest(value).subscribe((data: any) => {
+          console.log(data);
+          // Specifieke sensor ophalen die geselecteerd is
+          this.checkoutForm = this.formBuilder.group({
+            name: data.Name,
+            status: data.Status,
+            type: data.Type,
+            data_type: data.DataType,
+            location: data.Location,
+            description: data.Description
+          });
+        });
+      }
     });
   }
 

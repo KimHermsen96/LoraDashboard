@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   // @ViewChild
   overviewDetail;
   addSensor;
+  editSensor;
   settings;
 
   constructor() {
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
     this.overviewDetail = false;
     this.settings = true;
     this.addSensor = true;
+    this.editSensor = true;
   }
 
   navigate(view) {
@@ -26,6 +28,7 @@ export class HomeComponent implements OnInit {
     this.overviewDetail = true;
     this.settings = true;
     this.addSensor = true;
+    this.editSensor = true;
 
     switch (view) {
       case 'overzicht':
@@ -36,6 +39,9 @@ export class HomeComponent implements OnInit {
         break;
       case 'add_sensor':
         this.addSensor = false;
+        break;
+      case 'edit_sensor':
+        this.editSensor = false;
         break;
       default:
         this.overviewDetail = false;
