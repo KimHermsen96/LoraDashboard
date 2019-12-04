@@ -27,7 +27,7 @@ export class EditSensorComponent implements OnInit {
       name: '',
       status: '',
       type: '',
-      data_type: '',
+      dataType: '',
       location: '',
       description: ''
     });
@@ -41,7 +41,7 @@ export class EditSensorComponent implements OnInit {
           name: '',
           status: '',
           type: '',
-          data_type: '',
+          dataType: '',
           location: '',
           description: ''
         });
@@ -54,7 +54,7 @@ export class EditSensorComponent implements OnInit {
             name: data.Name,
             status: data.Status,
             type: data.Type,
-            data_type: data.DataType,
+            dataType: data.DataType,
             location: data.Location,
             description: data.Description
           });
@@ -82,9 +82,9 @@ export class EditSensorComponent implements OnInit {
   }
 
   private validateForm(formvalue) {
-    const formvalues = [formvalue.name, formvalue.data_type, formvalue.location];
+    const formvalues = [formvalue.name, formvalue.type, formvalue.dataType, formvalue.status, formvalue.location];
     formvalues.forEach( val => {
-      if (val.length > 2  || !val) {
+      if (val.length < 2  || !val) {
         this.addMessage( val + ' is verplicht en  mag niet meer dan 80 karakters lang zijn' );
       }
     });
@@ -106,8 +106,20 @@ export class EditSensorComponent implements OnInit {
       });
       this.message = [];
     } else {
-      this.message[0] = 'Uw sensor is succesvol opgeslagen in de database';
-      this.dialogservice.openDialog(this.message, true);
+      console.log(formvalue);
+      this.dataService.sendUpdateRequest(this.selectedOption, formvalue).subscribe((data: any) => {
+        console.log(data);
+        this.message[0] = 'Uw sensor is succesvol opgeslagen in de database';
+        this.dialogservice.openDialog(this.message, true);
+        this.checkoutForm = this.formBuilder.group({
+          name: '',
+          status: '',
+          type: '',
+          dataType: '',
+          location: '',
+          description: ''
+        });
+      });
     }
   }
 }

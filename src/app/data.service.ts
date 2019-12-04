@@ -37,6 +37,16 @@ export class DataService {
     console.log(this.REST_API_SERVER + 'delete/' + deleteId);
     return this.httpClient.delete(this.REST_API_SERVER + 'delete/' + deleteId).pipe(retry(3), catchError(this.handleError));
   }
+
+  public sendInsertRequest(body) {
+    console.log(this.REST_API_SERVER + 'insert');
+    return this.httpClient.post(this.REST_API_SERVER + 'insert', body).pipe(retry(3), catchError(this.handleError));
+  }
+
+  public sendUpdateRequest(updateId, body) {
+    console.log(this.REST_API_SERVER + 'update/' + updateId);
+    return this.httpClient.put(this.REST_API_SERVER + 'update/' + updateId, body).pipe(retry(3), catchError(this.handleError));
+  }
 }
 
 export class MyService {

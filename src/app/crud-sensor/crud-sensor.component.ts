@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {DialogService} from '../dialog.service';
+import {DataService, MyService} from '../data.service';
 
 @Component({
   selector: 'app-crud-sensor',
@@ -17,13 +18,15 @@ export class CrudSensorComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dialogservice: DialogService
+    private dialogservice: DialogService,
+    private dataService: DataService,
+    private myService: MyService
   ) {
     this.checkoutForm = this.formBuilder.group({
       name: '',
       status: '',
       type: '',
-      data_type: '',
+      dataType: '',
       location: '',
       description: ''
     });
@@ -48,9 +51,9 @@ export class CrudSensorComponent implements OnInit {
   }
 
   private validateForm(formvalue) {
-    const formvalues = [formvalue.name, formvalue.data_type, formvalue.location];
+    const formvalues = [formvalue.name, formvalue.type, formvalue.dataType, formvalue.status, formvalue.location];
     formvalues.forEach( val => {
-      if (val.length > 2  || !val) {
+      if (val.length < 2  || !val) {
         this.addMessage( val + ' is verplicht en  mag niet meer dan 80 karakters lang zijn' );
       }
     });
@@ -72,8 +75,20 @@ export class CrudSensorComponent implements OnInit {
       });
       this.message = [];
     } else {
-      this.message[0] = 'Uw sensor is succesvol opgeslagen in de database';
-      this.dialogservice.openDialog(this.message, true);
+        console.log(formvalue);
+        this.dataService.sendInsertRequest(formvalue).subscribe((data: any) => {
+            console.log(data);
+            this.message[0] = 'Uw sensor is succesvol opgeslagen in de database';
+            this.dialogservice.openDialog(this.message, true);
+            this.checkoutForm = this.formBuilder.group({
+                name: '',
+                status: '',
+                type: '',
+                dataType: '',
+                location: '',
+                description: ''
+            });
+        });
     }
   }
 }
