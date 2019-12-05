@@ -88,6 +88,7 @@ export class CrudSensorComponent implements OnInit {
                 location: '',
                 description: ''
             });
+            this.myService.myMethod2(true);
         });
     }
   }

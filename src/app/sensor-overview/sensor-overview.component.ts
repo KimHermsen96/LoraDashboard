@@ -10,6 +10,9 @@ import { DataService, MyService } from '../data.service';
 export class SensorOverviewComponent implements OnInit {
   // private map;
   public selectedOption: string;
+  public sensorListChanged = false;
+  sensors: string[] = [];
+  ids: string[] = [];
 
   // tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   //   maxZoom: 19,
@@ -18,17 +21,25 @@ export class SensorOverviewComponent implements OnInit {
 
   constructor(private dataService: DataService, private myService: MyService) {
     this.myService.myMethod(this.selectedOption);
+    this.myService.myMethod2(this.sensorListChanged);
+
+    this.myService.myMethod2$.subscribe((value) => {
+      if (value) {
+        this.getData();
+        this.selectedOption = '';
+        this.myService.myMethod(this.selectedOption);
+      }
+    });
   }
 
-
-  sensors: string[] = [];
-  ids: string[] = [];
-
-
   ngOnInit() {
+    this.getData();
     // this.initMap();
     // this.tiles.addTo(this.map);
-
+  }
+  private getData() {
+    this.sensors = [];
+    this.ids = [];
     this.dataService.sendGetRequest().subscribe((data: any[]) => {
       data.forEach((element) => {
         this.sensors.push(element.Name);
@@ -36,13 +47,6 @@ export class SensorOverviewComponent implements OnInit {
       });
     });
   }
-  
-  // private initMap(): void {
-  //   this.map = L.map('map', {
-  //     center: [51.69917, 5.30417],
-  //     zoom: 12
-  //   });
-  // }
 
   private valueChanged() {
     this.myService.myMethod(this.selectedOption);

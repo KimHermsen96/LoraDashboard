@@ -67,7 +67,15 @@ export class SensorDetailComponent implements OnInit {
   deleteSensor() {
     console.log(this.selectedOption);
     this.dataService.sendDeleteRequest(this.selectedOption).subscribe((data: any) => {
-      console.log(data);
+        console.log(data);
+        this.values = [
+            {name: 'Naam' , value: '-'},
+            {name: 'Status' , value: '-'},
+            {name: 'Type' , value: '-'},
+            {name: 'Soort data' , value: '-'},
+            {name: 'Locatie' , value: '-'},
+        ];
+        this.myService.myMethod2(true);
     });
   }
   navigate(x) {

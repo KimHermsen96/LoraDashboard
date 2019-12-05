@@ -50,16 +50,25 @@ export class DataService {
 }
 
 export class MyService {
-  myMethod$: Observable<any>;
-  private myMethodSubject = new Subject<any>();
+    myMethod$: Observable<any>;
+    private myMethodSubject = new Subject<any>();
+    myMethod2$: Observable<any>;
+    private myMethod2Subject = new Subject<any>();
 
   constructor() {
     this.myMethod$ = this.myMethodSubject.asObservable();
+    this.myMethod2$ = this.myMethod2Subject.asObservable();
   }
 
-  myMethod(data) {
-    console.log(data);
-    // we can do stuff with data if we want
-    this.myMethodSubject.next(data);
-  }
+    myMethod(data) {
+        console.log(data);
+        // we can do stuff with data if we want
+        this.myMethodSubject.next(data);
+    }
+
+    myMethod2(data) {
+        console.log(data);
+        // we can do stuff with data if we want
+        this.myMethod2Subject.next(data);
+    }
 }

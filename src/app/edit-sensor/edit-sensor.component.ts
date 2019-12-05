@@ -120,6 +120,7 @@ export class EditSensorComponent implements OnInit {
           description: ''
         });
       });
+      this.myService.myMethod2(true);
     }
   }
 }
