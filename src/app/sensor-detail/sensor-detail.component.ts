@@ -14,6 +14,7 @@ export class SensorDetailComponent implements OnInit {
   sensorName = '-';
   image = 'https://robu.in/wp-content/uploads/2017/05/voltage-sensor-1.png';
   description = '-';
+  APIlink = '-';
 
   values = [
     {name: 'Naam' , value: '-'},
@@ -41,6 +42,7 @@ export class SensorDetailComponent implements OnInit {
             ];
             this.sensorName = '-';
             this.description = '-';
+            this.APIlink = '-';
           } else {
             // Not undefined
             this.dataService.sendGetRequest(value).subscribe((data: any) => {
@@ -55,6 +57,7 @@ export class SensorDetailComponent implements OnInit {
               ];
               this.sensorName = data.Name;
               this.description = data.Description;
+              this.APIlink = this.dataService.getAPIlink() + this.selectedOption;
             });
           }
         }
