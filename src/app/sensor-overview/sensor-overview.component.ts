@@ -11,7 +11,7 @@ export class SensorOverviewComponent implements OnInit {
   // private map;
   public selectedOption: string;
   public sensorListChanged = false;
-  sensors: string[] = [];
+  sensors = [];
   ids: string[] = [];
 
   // tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -42,8 +42,10 @@ export class SensorOverviewComponent implements OnInit {
     this.ids = [];
     this.dataService.sendGetRequest().subscribe((data: any[]) => {
       data.forEach((element) => {
-        this.sensors.push(element.Name);
+        this.ids = [];
         this.ids.push(element.id);
+        this.ids.push(element.Name);
+        this.sensors.push(this.ids);
       });
     });
   }

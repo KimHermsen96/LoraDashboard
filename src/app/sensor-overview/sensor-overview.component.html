@@ -7,7 +7,7 @@
     <mat-label>Kies een sensor </mat-label>
     <mat-select [(ngModel)]="selectedOption" (selectionChange)="valueChanged()">
       <mat-option>None</mat-option>
-      <mat-option *ngFor="let sensor of ids" [value]="sensor">{{sensor}}</mat-option>
+      <mat-option *ngFor="let sensor of sensors" [value]="sensor[0]">{{sensor[1]}}</mat-option>
     </mat-select>
   </mat-form-field>
 </mat-card>
