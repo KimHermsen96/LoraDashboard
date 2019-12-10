@@ -87,6 +87,7 @@ export class CrudSensorComponent implements OnInit {
         this.dataService.sendInsertRequest(formvalue).subscribe((data: any) => {
             console.log(data);
             this.message[0] = 'Uw sensor is succesvol opgeslagen in de database';
+            this.message[1] = 'uw id is: ' + data.message.split(' ')[0] + ' en uw secret is: ' + data.message.split(' ')[1];
             this.dialogservice.openDialog(this.message, true);
             this.checkoutForm = this.formBuilder.group({
                 name: '',
