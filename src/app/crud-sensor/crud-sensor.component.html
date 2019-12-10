@@ -40,7 +40,19 @@
         </textarea>
       </mat-form-field>
 
-      <button mat-raised-button class="submit-button" type="submit">Opslaan</button>
+      <div>
+        Sensor afbeelding
+        <button class="FileButton" type="button" mat-raised-button (click)="fileInput.click()"> Zoek op computer</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+
+        <div *ngIf="selectedFile">
+          {{selectedFile.name}} is geselecteerd
+        </div>
+      </div>
+
+      <div style="margin-top: 50px;">
+        <button mat-raised-button class="submit-button" type="submit">Opslaan</button>
+      </div>
     </form>
   </mat-card>
 </div>

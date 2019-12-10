@@ -9,8 +9,7 @@ import { SettingsComponent} from './settings/settings.component';
 const routes: Routes = [
   { path: 'overzicht', component: HomeComponent },
   { path: 'nieuwe_sensor', component: CrudSensorComponent },
-  { path: 'aanpassen_sensor', component: EditSensorComponent },
-  { path: 'instellingen', component: SettingsComponent }
+  { path: 'aanpassen_sensor', component: EditSensorComponent }
 ];
 
 @NgModule({

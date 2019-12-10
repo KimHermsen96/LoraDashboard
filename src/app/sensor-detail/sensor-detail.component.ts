@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, MyService } from '../data.service';
 import { AppComponent } from '../app.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class SensorDetailComponent implements OnInit {
   public selectedOption: string;
 
   sensorName = '-';
-  image = 'https://robu.in/wp-content/uploads/2017/05/voltage-sensor-1.png';
+  image;
   description = '-';
   APIlink = '-';
 
@@ -27,7 +28,8 @@ export class SensorDetailComponent implements OnInit {
   constructor(
       private dataService: DataService,
       private myService: MyService,
-      private appComponent: AppComponent
+      private appComponent: AppComponent,
+      private sanitizer: DomSanitizer
   ) {
     this.myService.myMethod$.subscribe((value) => {
           this.selectedOption = value;
@@ -43,6 +45,7 @@ export class SensorDetailComponent implements OnInit {
             this.sensorName = '-';
             this.description = '-';
             this.APIlink = '-';
+            this.image = '';
           } else {
             // Not undefined
             this.dataService.sendGetRequest(value).subscribe((data: any) => {
@@ -58,10 +61,16 @@ export class SensorDetailComponent implements OnInit {
               this.sensorName = data.Name;
               this.description = data.Description;
               this.APIlink = this.dataService.getAPIlink() + this.selectedOption;
+              if (data.Image !== '') {
+                  this.image = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + data.Image);
+              } else {
+                  this.image = '';
+              }
             });
           }
         }
     );
+    this.image = '';
   }
 
   ngOnInit() {
@@ -78,6 +87,7 @@ export class SensorDetailComponent implements OnInit {
             {name: 'Soort data' , value: '-'},
             {name: 'Locatie' , value: '-'},
         ];
+        this.image = '';
         this.myService.myMethod2(true);
     });
   }

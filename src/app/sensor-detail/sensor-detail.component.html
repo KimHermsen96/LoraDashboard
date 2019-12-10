@@ -2,7 +2,7 @@
 
   <h1> {{sensorName}} </h1>
   <hr>
-  <img src="{{image}}" alt="sensor afbeelding">
+  <img *ngIf="image != ''" [src]="image" alt="sensor afbeelding">
 
   <ul>
     <li *ngFor="let val of values">

@@ -14,6 +14,7 @@ export class EditSensorComponent implements OnInit {
   selectedFile;
   message: string[] = [];
   srcResult;
+  base64textString = '';
   public selectedOption: string;
 
   constructor(
@@ -29,7 +30,8 @@ export class EditSensorComponent implements OnInit {
       type: '',
       dataType: '',
       location: '',
-      description: ''
+      description: '',
+      image: ''
     });
 
     this.myService.myMethod$.subscribe((value) => {
@@ -43,7 +45,8 @@ export class EditSensorComponent implements OnInit {
           type: '',
           dataType: '',
           location: '',
-          description: ''
+          description: '',
+          image: ''
         });
       } else {
         // Not undefined
@@ -56,7 +59,8 @@ export class EditSensorComponent implements OnInit {
             type: data.Type,
             dataType: data.DataType,
             location: data.Location,
-            description: data.Description
+            description: data.Description,
+            image: data.Image
           });
         });
       }
@@ -68,17 +72,24 @@ export class EditSensorComponent implements OnInit {
 
 
   onFileSelected() {
-    const inputNode: any = document.querySelector('#file');
+    const inputNode2: any = document.querySelector('#file2');
+    const file = inputNode2.files[0];
+    console.log(file);
 
-    if (typeof (FileReader) !== 'undefined') {
+    if (file) {
       const reader = new FileReader();
 
-      reader.onload = (e: any) => {
-        this.srcResult = e.target.result;
-      };
+      reader.onload = this._handleReaderLoaded.bind(this);
 
-      reader.readAsArrayBuffer(inputNode.files[0]);
+      reader.readAsBinaryString(file);
+      console.log('test2: ');
     }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    const binaryString = readerEvt.target.result;
+    this.base64textString = btoa(binaryString);
+    console.log(this.base64textString);
   }
 
   private validateForm(formvalue) {
@@ -98,6 +109,11 @@ export class EditSensorComponent implements OnInit {
 
   onSubmit(formvalue) {
     this.validateForm(formvalue);
+    if (this.base64textString !== '') {
+      formvalue.image = this.base64textString;
+    } else {
+      formvalue.image = this.checkoutForm.image;
+    }
 
     if (this.message.length > 0) {
       this.dialogservice.openDialog(this.message, false);
@@ -117,8 +133,10 @@ export class EditSensorComponent implements OnInit {
           type: '',
           dataType: '',
           location: '',
-          description: ''
+          description: '',
+          image: ''
         });
+        this.base64textString = '';
         this.myService.myMethod2(true);
       });
     }

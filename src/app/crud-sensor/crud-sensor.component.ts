@@ -12,6 +12,7 @@ import {DataService, MyService} from '../data.service';
 export class CrudSensorComponent implements OnInit {
   checkoutForm;
   selectedFile;
+  base64textString;
   message: string[] = [];
   srcResult;
 
@@ -28,7 +29,8 @@ export class CrudSensorComponent implements OnInit {
       type: '',
       dataType: '',
       location: '',
-      description: ''
+      description: '',
+      image: ''
     });
   }
 
@@ -37,18 +39,23 @@ export class CrudSensorComponent implements OnInit {
 
 
   onFileSelected() {
-    const inputNode: any = document.querySelector('#file');
+      const inputNode: any = document.querySelector('#file');
+      const file = inputNode.files[0];
 
-    if (typeof (FileReader) !== 'undefined') {
-      const reader = new FileReader();
+      if (file) {
+          const reader = new FileReader();
 
-      reader.onload = (e: any) => {
-        this.srcResult = e.target.result;
-      };
+          reader.onload = this._handleReaderLoaded.bind(this);
 
-      reader.readAsArrayBuffer(inputNode.files[0]);
-    }
+          reader.readAsBinaryString(file);
+      }
   }
+
+    _handleReaderLoaded(readerEvt) {
+        const binaryString = readerEvt.target.result;
+        this.base64textString = btoa(binaryString);
+        console.log(this.base64textString);
+    }
 
   private validateForm(formvalue) {
     const formvalues = [formvalue.name, formvalue.type, formvalue.dataType, formvalue.status, formvalue.location];
@@ -67,6 +74,7 @@ export class CrudSensorComponent implements OnInit {
 
   onSubmit(formvalue) {
     this.validateForm(formvalue);
+    formvalue.image = this.base64textString;
 
     if (this.message.length > 0) {
       this.dialogservice.openDialog(this.message, false);
@@ -86,8 +94,10 @@ export class CrudSensorComponent implements OnInit {
                 type: '',
                 dataType: '',
                 location: '',
-                description: ''
+                description: '',
+                image: ''
             });
+            this.base64textString = '';
             this.myService.myMethod2(true);
         });
     }

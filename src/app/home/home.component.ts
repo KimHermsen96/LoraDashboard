@@ -11,14 +11,12 @@ export class HomeComponent implements OnInit {
   overviewDetail;
   addSensor;
   editSensor;
-  settings;
 
   constructor() {
   }
 
   ngOnInit() {
     this.overviewDetail = false;
-    this.settings = true;
     this.addSensor = true;
     this.editSensor = true;
   }
@@ -26,16 +24,12 @@ export class HomeComponent implements OnInit {
   navigate(view) {
 
     this.overviewDetail = true;
-    this.settings = true;
     this.addSensor = true;
     this.editSensor = true;
 
     switch (view) {
       case 'overzicht':
         this.overviewDetail = false;
-        break;
-      case 'settings' :
-        this.settings = false;
         break;
       case 'add_sensor':
         this.addSensor = false;
