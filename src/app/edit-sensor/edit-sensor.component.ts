@@ -119,8 +119,8 @@ export class EditSensorComponent implements OnInit {
           location: '',
           description: ''
         });
+        this.myService.myMethod2(true);
       });
-      this.myService.myMethod2(true);
     }
   }
 }
