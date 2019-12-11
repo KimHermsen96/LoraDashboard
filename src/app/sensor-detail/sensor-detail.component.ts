@@ -16,6 +16,7 @@ export class SensorDetailComponent implements OnInit {
   image;
   description = '-';
   APIlink = '-';
+  sensorData = [];
 
   values = [
     {name: 'Naam' , value: '-'},
@@ -46,6 +47,7 @@ export class SensorDetailComponent implements OnInit {
             this.description = '-';
             this.APIlink = '-';
             this.image = '';
+            this.sensorData = [];
           } else {
             // Not undefined
             this.dataService.sendGetRequest(value).subscribe((data: any) => {
@@ -61,11 +63,20 @@ export class SensorDetailComponent implements OnInit {
               this.sensorName = data.Name;
               this.description = data.Description;
               this.APIlink = this.dataService.getAPIlink() + this.selectedOption;
-              if (data.Image !== '') {
+              if (data.Image !== '' && data.Image !== null) {
                   this.image = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + data.Image);
               } else {
                   this.image = '';
               }
+            });
+            this.dataService.sendGetRequest(value, 1).subscribe((data: any) => {
+                this.sensorData = [];
+                for (const i in data) {
+                    if (parseInt(i) < 3) { //TODO: Weg halen / veranderen, laat nu maar 3 resultaten zien.
+                        console.log(data[i]);
+                        this.sensorData.push(data[i]);
+                    }
+                }
             });
           }
         }
@@ -88,6 +99,7 @@ export class SensorDetailComponent implements OnInit {
             {name: 'Locatie' , value: '-'},
         ];
         this.image = '';
+        this.sensorData = [];
         this.myService.myMethod2(true);
     });
   }

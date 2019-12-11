@@ -11,7 +11,7 @@ import {DataService, MyService} from '../data.service';
 })
 export class EditSensorComponent implements OnInit {
   checkoutForm;
-  selectedFile;
+  selectedFile = 0;
   message: string[] = [];
   srcResult;
   base64textString = '';
@@ -48,6 +48,7 @@ export class EditSensorComponent implements OnInit {
           description: '',
           image: ''
         });
+        this.selectedFile = 0;
       } else {
         // Not undefined
         this.dataService.sendGetRequest(value).subscribe((data: any) => {
@@ -62,6 +63,7 @@ export class EditSensorComponent implements OnInit {
             description: data.Description,
             image: data.Image
           });
+          this.selectedFile = 0;
         });
       }
     });
@@ -89,6 +91,7 @@ export class EditSensorComponent implements OnInit {
   _handleReaderLoaded(readerEvt) {
     const binaryString = readerEvt.target.result;
     this.base64textString = btoa(binaryString);
+    this.selectedFile = 1;
     console.log(this.base64textString);
   }
 
@@ -137,6 +140,7 @@ export class EditSensorComponent implements OnInit {
           image: ''
         });
         this.base64textString = '';
+        this.selectedFile = 0;
         this.myService.myMethod2(true);
       });
     }

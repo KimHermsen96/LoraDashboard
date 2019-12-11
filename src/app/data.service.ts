@@ -26,12 +26,17 @@ export class DataService {
     return throwError(errorMessage);
   }
 
-  public sendGetRequest(query = null) {
+  public sendGetRequest(query = null, measurement = 0) {
     if (query == null) {
       query = '';
     }
-    console.log(this.REST_API_SERVER + query);
-    return this.httpClient.get(this.REST_API_SERVER + query).pipe(retry(3), catchError(this.handleError));
+    if (measurement) {
+        console.log(this.REST_API_MEASUREMENT + query);
+        return this.httpClient.get(this.REST_API_MEASUREMENT + query).pipe(retry(3), catchError(this.handleError));
+    } else {
+        console.log(this.REST_API_SERVER + query);
+        return this.httpClient.get(this.REST_API_SERVER + query).pipe(retry(3), catchError(this.handleError));
+    }
   }
 
   public sendDeleteRequest(deleteId) {
