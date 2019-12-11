@@ -72,7 +72,7 @@ export class SensorDetailComponent implements OnInit {
             this.dataService.sendGetRequest(value, 1).subscribe((data: any) => {
                 this.sensorData = [];
                 for (const i in data) {
-                    if (parseInt(i) < 3) { //TODO: Weg halen / veranderen, laat nu maar 3 resultaten zien.
+                    if (parseInt(i) < 30) { //TODO: Weg halen / veranderen, laat nu maar 30 resultaten zien.
                         console.log(data[i]);
                         this.sensorData.push(data[i]);
                     }
