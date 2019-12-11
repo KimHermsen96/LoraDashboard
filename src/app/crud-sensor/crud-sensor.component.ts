@@ -11,7 +11,7 @@ import {DataService, MyService} from '../data.service';
 })
 export class CrudSensorComponent implements OnInit {
   checkoutForm;
-  selectedFile;
+  selectedFile = 0;
   base64textString;
   message: string[] = [];
   srcResult;
@@ -32,6 +32,7 @@ export class CrudSensorComponent implements OnInit {
       description: '',
       image: ''
     });
+    this.selectedFile = 0;
   }
 
   ngOnInit() {
@@ -54,6 +55,7 @@ export class CrudSensorComponent implements OnInit {
     _handleReaderLoaded(readerEvt) {
         const binaryString = readerEvt.target.result;
         this.base64textString = btoa(binaryString);
+        this.selectedFile = 1;
         console.log(this.base64textString);
     }
 
@@ -99,6 +101,8 @@ export class CrudSensorComponent implements OnInit {
                 image: ''
             });
             this.base64textString = '';
+            this.selectedFile = 0;
+            this.message = [];
             this.myService.myMethod2(true);
         });
     }
