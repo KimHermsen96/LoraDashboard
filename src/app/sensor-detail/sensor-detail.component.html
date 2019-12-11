@@ -1,26 +1,31 @@
 <mat-card>
 
-  <h1> {{sensorName}} </h1>
-  <hr>
-  <img *ngIf="image != ''" [src]="image" alt="sensor afbeelding">
+    <h1> {{sensorName}} </h1>
+    <hr>
+    <img *ngIf="image != '' && image != null" [src]="image" alt="sensor afbeelding">
 
-  <ul>
-    <li *ngFor="let val of values">
-     <h3> {{ val.name}} </h3>
-      {{ val.value}}
-    </li>
-  </ul>
+    <ul>
+        <li *ngFor="let val of values">
+            <h3> {{ val.name}} </h3>
+            {{ val.value}}
+        </li>
+    </ul>
 
-  <h3> Context</h3>
-  <div class="description">
-    {{description}}
-  </div>
+    <h3> Context</h3>
+    <div class="description">
+        {{description}}
+    </div>
 
-  <h4> API Sensor data</h4>
-  <div class="description">
-    <a href="{{APIlink}}" target="_blank">{{APIlink}}</a>
-  </div>
+    <h4> API Sensor data</h4>
+    <div class="description">
+        <a href="{{APIlink}}" target="_blank">{{APIlink}}</a>
+        <p *ngFor="let val of sensorData">
+            {{val.DateTime}}
+            <br>
+            {{val.Value}}
+        </p>
+    </div>
 
     <button mat-button (click)="navigate('edit_sensor')"> Aanpassen </button>
-  <button mat-button (click)="deleteSensor()"> Verwijderen </button>
+    <button mat-button (click)="deleteSensor()"> Verwijderen </button>
 </mat-card>
