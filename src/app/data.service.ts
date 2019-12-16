@@ -8,9 +8,9 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class DataService {
 
-  private REST_API_SERVER = 'http://192.168.1.44:3000/devices/';
-  private REST_API_MEASUREMENT = 'http://192.168.1.44:3000/measurements/';
-
+  private REST_API_SERVER = 'http://dwnb.nl:8880/devices/';
+  private REST_API_MEASUREMENT = 'http://dwnb.nl:8880/measurements/';
+  
   constructor(private httpClient: HttpClient) { }
 
   handleError(error: HttpErrorResponse) {
