@@ -60,10 +60,10 @@ export class CrudSensorComponent implements OnInit {
     }
 
   private validateForm(formvalue) {
-    const formvalues = [formvalue.name, formvalue.type, formvalue.dataType, formvalue.status, formvalue.location];
-    formvalues.forEach( val => {
-      if (val.length < 2  || !val) {
-        this.addMessage( val + ' is verplicht en  mag niet meer dan 80 karakters lang zijn' );
+    const formvalues = {name: formvalue.name, type: formvalue.type, dateType: formvalue.dataType, status: formvalue.status, location: formvalue.location};
+    Object.keys(formvalues).forEach( key => {
+      if (formvalues[key].length < 2  || !formvalues[key]) {
+        this.addMessage( key + ' is verplicht en  mag niet meer dan 80 karakters lang zijn' );
       }
     });
   }
@@ -75,6 +75,8 @@ export class CrudSensorComponent implements OnInit {
   }
 
   onSubmit(formvalue) {
+    
+    this.message = [];
     this.validateForm(formvalue);
     formvalue.image = this.base64textString;
 
@@ -89,8 +91,8 @@ export class CrudSensorComponent implements OnInit {
         this.dataService.sendInsertRequest(formvalue).subscribe((data: any) => {
             console.log(data);
             this.message[0] = 'Uw sensor is succesvol opgeslagen in de database';
-            this.message[1] = 'Uw id is: ' + data.message.split(' ')[1];
-            this.message[2] = 'Uw secret is: ' + data.message.split(' ')[0];
+            this.message[1] = 'Uw id is: ' + data.id;
+            this.message[2] = 'Uw secret is: ' + data.secret;
             this.dialogservice.openDialog(this.message, true);
             this.checkoutForm = this.formBuilder.group({
                 name: '',

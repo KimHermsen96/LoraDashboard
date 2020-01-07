@@ -19,7 +19,8 @@ export class DialogService {
       width: '600px',
       data: {message: m},
     });
-
+    this.accomplished = [];
+    this.messages = [];
     if (accomplished) {
       this.accomplished = m;
     } else {
