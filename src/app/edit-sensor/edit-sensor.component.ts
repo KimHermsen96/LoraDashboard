@@ -141,6 +141,7 @@ export class EditSensorComponent implements OnInit {
         });
         this.base64textString = '';
         this.selectedFile = 0;
+        this.message = [];
         this.myService.myMethod2(true);
       });
     }
